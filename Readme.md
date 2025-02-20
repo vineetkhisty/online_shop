@@ -1,231 +1,78 @@
+# Online Shop 🛍️ - Hackathon Phase 1
 
-Online Shop 🛍️ - Hackathon Phase 1
+## Overview
+In this project, I have **Dockerized** an Online Shopping App developed in **React**. The goal was to containerize the application using **Docker** and deploy it on an **AWS EC2 instance**.
 
+---
 
-Summary
+## Tools & Technologies
+- **Git**
+- **GitHub**
+- **Linux (Ubuntu)**
+- **Docker**
+- **Networking (AWS EC2)**
 
+---
 
-By Dockerizing the Online Shopping App, I achieved an optimized, portable, and scalable application ready for deployment on any server or cloud platform. With the help of Docker Compose, I could easily manage the configurations and scaling of the app.
+## GitHub
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+I **forked** the repository from the original GitHub repo and pushed it to my own GitHub account.
 
-Tools & Technologies:
+Repository: [online_shop repository](https://github.com/iemafzalhassan/online_shop)
 
+---
 
-Git
+## Git Commands Used
+Here are the Git commands used throughout the process:
 
-GitHub
+1. **git init**: Initializes an empty Git repository.
+2. **git clone <repo url>**: Clones the repository into the EC2 instance.
+3. **git checkout <branch_name>**: Creates a new branch and switches to it.
+4. **git add .**: Stages the changes in the local repository.
+5. **git commit -m "Commit message"**: Commits all staged changes to the local repository.
+6. **git push origin <branch_name>**: Pushes the changes to the GitHub repository.
 
-Linux (Ubuntu)
+---
 
-Docker
+## Dockerization Process
 
-Networking (AWS EC2)
+### Dockerizing the React App
+I created **two Dockerfiles** to build the app:
+- **Dockerfile (Without Nginx)**  
+   A multi-stage Dockerfile without the Nginx web server, using `npm serve` to serve the app. The resulting image size is approximately **212 MB**.
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-GitHub
-I forked the repository from the original GitHub repo and pushed it to my own GitHub account.
+- **Dockerfile-multi-stage (With Nginx)**  
+   A multi-stage Dockerfile with Nginx as the web server, reducing the image size to **19 MB**.
 
-Repository: https://github.com/iemafzalhassan/online_shop
+---
 
+## Docker Compose Setup
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Git Commands Used
+1. **docker-compose.yml**: For the Dockerfile without Nginx, running on **PORT 3000**.
+2. **docker-compose-nginx.yaml**: For the Dockerfile with Nginx, running on **PORT 80**.
 
+---
 
-The following Git commands were used throughout the process:
+## Useful Docker Commands
 
+- **docker build**: Build the Docker image from the Dockerfile and tag it.
+- **docker compose -f <file>.yml up -d**: Build and deploy the container in detached mode.
+- **docker image tag <source_image_name> <dest_repo>/<imagename>**: Tag the Docker image.
+- **docker push <dest_repo>/<imagename>**: Push the image to Docker Hub.
 
-git init
+---
 
-Initializes an empty Git repository.
+## EC2 Networking and Deployment
 
+The app was deployed to an **AWS EC2 instance** for live production.
 
+---
 
-git clone <repo url>
+## Conclusion
 
-Clones the repository into the EC2 instance.
+By Dockerizing the Online Shopping App, I created an optimized, portable, and scalable application for deployment. The app is now ready to run anywhere with Docker support.
 
+---
 
-
-git checkout <branch_name>
-
-Creates a new branch and switches to it.
-
-
-
-git add .
-
-Stages the changes in the local repository.
-
-
-
-git status
-
-Checks the status to confirm if everything is staged.
-
-
-
-git commit -m "Commit message"
-
-Commits all the staged changes to the local repository.
-
-
-
-git push origin <branch_name>
-
-Pushes the changes to the GitHub repository.
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Linux Commands Used
-
-
-Below are the Linux commands that were used for Dockerizing the app:
-
-
-
-vim Dockerfile
-
-Opened the Vim editor to create the Dockerfile.
-
-
-
-
-cd <path>
-
-Navigated between directories.
-
-
-
-ls
-
-Listed the contents of the current directory.
-
-
- 
-sudo apt-get update
-
-Updated all libraries in the Ubuntu distribution.
-
-
-
-sudo apt-get install docker.io -y
-
-Installed Docker and used -y to automatically confirm the installation.
-
-
-
-sudo usermod -aG docker $USER
-
-Added the current user to the Docker group to grant necessary permissions.
-
-
-
-newgrp docker
-
-Refreshed the Docker group to apply the new permissions.
-
-
-
-sudo apt-get install docker-compose-v2
-
-Installed Docker Compose version 2.
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Dockerization Process
-
-
-Dockerizing the React App
-
-I used two Dockerfiles to create the Docker images for the application.
-
-
-
-Dockerfile (Without Nginx)
-
-A multi-stage Dockerfile without the Nginx web server, utilizing the npm serve command to serve the app.
-The resulting image size was approximately 212 MB.
-
-
-
-Dockerfile-multi-stage (With Nginx)
-
-To optimize the image size and enhance security, I used another multi-stage Dockerfile. In this version, an Nginx server is introduced in the second stage. It takes the npm build output from the first stage and serves the app through the Nginx default path.
-The resulting image size is significantly reduced to 19 MB.
-
-
-
-Docker Compose Setup
-
-I created two Docker Compose files for the different Dockerfiles:
-
-
-
-
-docker-compose.yml
-
-Used for building and deploying the Docker container without the Nginx server, running on PORT 3000.
-
-
-
-docker-compose-nginx.yaml
-
-Used for building and deploying the Docker container with Nginx, running on PORT 80.
-
-
-
-Docker Commands Used
-
-
-Here are the important Docker commands that were used:
-
-
-
-docker build -t <repo>:<imagetag> .
-
-Builds the Docker image from the Dockerfile and tags it with the specified repository and image tag.
-
-
-
-
-vim docker-compose.yml
-
-Opened the Vim editor to create the Docker Compose file with relevant configurations.
-
-
-
-
-docker compose -f <DockerComposeFileName> up -d
-
-Builds and deploys the Docker container on the EC2 instance. The -f flag specifies the Docker Compose filename, and -d runs the container in detached mode.
-
-
-
-
-docker image tag <source_image_name> <dest_repo>/<imagename>
-
-Tags the built image with the specified destination repository and image name.
-
-
-
-
-docker push <dest_repo>/<imagename>
-
-Pushes the tagged Docker image to the Docker Hub repository.
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-EC2 Networking and Deployment
-
-Once the Docker image was built and tested locally, the next step was to deploy the app on an EC2 instance:
-
-AWS EC2 Instance Setup:
-
-The EC2 instance was set up, and the Docker images were transferred to it. The app was then run inside the Docker container on the EC2 instance, making it accessible via the public IP. Also enabled the Port 3000 on the EC2 security group
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Contact:**  
+If you have any questions, feel free to reach out to me via [GitHub](https://github.com/username).
