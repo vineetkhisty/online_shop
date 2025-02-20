@@ -1,0 +1,7 @@
+services:
+  reactapp:
+    build: .
+    container_name: onlineapp_full
+    ports:
+      - "3000:3000"
+

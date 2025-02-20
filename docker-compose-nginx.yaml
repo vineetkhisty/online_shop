@@ -1,0 +1,9 @@
+services:
+  onlineapp:
+    build: 
+      context: .
+      dockerfile: Dockerfile-multi-stage
+    container_name: onlineapp_multistage
+    ports: 
+      - "80:80"
+
