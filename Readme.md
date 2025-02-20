@@ -75,4 +75,4 @@ By Dockerizing the Online Shopping App, I created an optimized, portable, and sc
 ---
 
 **Contact:**  
-If you have any questions, feel free to reach out to me via [GitHub](https://github.com/username).
+If you have any questions, feel free to reach out to me via [GitHub](https://github.com/vineetkhisty/online_shop).
